@@ -1,0 +1,15 @@
+<% if local_assigns[:record] && record.errors.any? %>
+  <ul class="clear text-left">
+    <% record.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% elsif local_assigns[:flash]
+ 	errors = ""
+	flash.each do |name, msg|
+		msg = msg.join('</li><li>') if msg.is_a?(Array)
+	  errors += "<li>#{msg}</li>" if msg.is_a?(String)
+	end
+  %>
+  <%= "<ul class=\"validation-errors\">#{errors}</ul>".html_safe unless errors.blank? %>
+<% end %>

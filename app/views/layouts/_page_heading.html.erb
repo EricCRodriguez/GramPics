@@ -1,0 +1,18 @@
+<% if content_for?(:page_heading) %>
+<div class="row">
+  <div class="col-sm-7">
+    <p class="h4 m-b-20"><%= yield :page_heading %></p>
+    <% if content_for?(:page_subheading) %>
+      <p class="text-muted page-title-alt"><%= yield :page_subheading %></p>
+    <% end %>
+  </div>
+
+  <% if content_for?(:page_cta) %>
+    <div class="col-sm-5 mb-4">
+      <div class="pull-right">
+        <%= yield(:page_cta) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>

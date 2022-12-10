@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-lg-8 mt-4">
+      <h2 class="mb-4">Followers</h2>
+
+      <% if @accounts.size > 0 %>
+        <% @accounts.each do |account| %>
+          <div class="recommended-follower">
+            <div class="row">
+              <div class="col-2 col-lg-1">
+                <%= link_to profile_picture(account, 40), profile_path(account.username) %>
+              </div>
+              <div class="col-10 col-lg-8">
+                <% if account_signed_in? && current_account.id == @account.id %>
+                  <% if @following_ids.include? account.id %>
+                    <span class="btn btn-outline-secondary btn-sm disabled float-right">Following</span>
+                  <% else %>
+                    <%= form_tag follow_account_path, method: :post, class: "float-right" do %>
+                      <%= hidden_field_tag :follow_id, account.id %>
+                      <%= submit_tag "Follow Back", class: "btn btn-info btn-sm" %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+
+                <%= link_to account.username, profile_path(account.username), class: "text-dark font-weight-bold" %>
+                <p class="text-muted"><%= account.created_at > 2.days.ago ? "New User" : "Followed by #{account.total_followers} users" %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% else %>
+        <p>No users to display.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

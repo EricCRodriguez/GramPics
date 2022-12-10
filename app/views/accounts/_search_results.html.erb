@@ -1,0 +1,15 @@
+<ul class="list-unstyled">
+  <% if results.size > 0 %>
+    <% results.each do |account| %>
+      <li>
+        <%= link_to profile_path(account.username) do %>
+          <%= profile_thumbnail(account, 40) %>
+          <%= account.username %><br />
+          <span class="text-muted"><%= account.full_name %></span>
+        <% end %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>No results to display.</li>
+  <% end %>
+</ul>

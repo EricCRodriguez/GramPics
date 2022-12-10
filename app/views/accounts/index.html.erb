@@ -1,0 +1,74 @@
+<%= title "News Feed" %>
+
+<div class="row">
+  <div class="col-lg-8" id="feed">
+    <%= link_to image_tag(@banner_feed_top.image.url, class: 'img-fluid mb-3'), @banner_feed_top.url, target: "_blank" if @banner_feed_top.present? %>
+
+    <% @posts.each do |post| %>
+      <div class="insta-post">
+        <div class="post-meta">
+          <%= link_to profile_picture(post.account, 40), profile_path(post.account.username) %>
+          <%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %>
+        </div>
+
+        <%= image_tag post.image.url, class: "img img-fluid" %>
+
+        <div class="post-details">
+          <div class="post-actions">
+            <i class="fa fa-heart like-<%= post.id %> <%= 'active' if post_liked_by_user?(@my_liked_posts, post.id) %> fa-2x post-like" data-id="<%= post.id %>"></i>
+            <%= link_to post_path(post.id) do %>
+              <i class="fa fa-comment fa-2x post-comment"></i>
+            <% end %>
+          </div>
+
+          <p><strong id="post-<%= post.id %>-likes"><%= post.total_likes_count %> likes</strong></p>
+          <p><strong id="post-<%= post.id %>-comments"><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
+
+          <%= simple_format post.description %>
+
+          <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+
+          <%= render "posts/comments", post: post, comments: post.comments %>
+        </div>
+        <div class="comment-box">
+          <%= form_for @comment do |f| %>
+            <%= f.hidden_field :post_id, value: post.id %>
+            <div class="input-group">
+            <%= f.text_field :comment, placeholder: "Add comment here...", class: "form-control post-comment" %>
+              <div class="input-group-append">
+                <%= f.submit "Post", class: "btn btn-success float-right" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% if @posts.size == 0 %>
+      <p>No posts to display.</p>
+    <% end %>
+  </div>
+  <div class="col col-lg-4">
+    <div class="sidebar-wrapper position-fixed">
+      <div class="account-summary d-none d-lg-block">
+        <p class="m-0">
+          <%= link_to profile_thumbnail(current_account, 50, "img-circle float-left m-r-15"), profile_path(current_account.username) %>
+          <strong><%= link_to current_account.username, profile_path(current_account.username), class: "text-dark" %></strong><br />
+          <%= current_account.full_name %>
+        </p>
+      </div>
+      <div class="follower-suggestions mb-2">
+        <%#= link_to "View All", "#", class: "float-right text-dark" %>
+        <p class="text-muted">Suggestions for you</p>
+        <%= render "accounts/follower_suggestions" %>
+      </div>
+
+      <% if @banner_sidebar.present? %>
+        <div class="border mt-3 mb-2">
+          <%= link_to image_tag(@banner_sidebar.image.url, class: 'img-fluid'), @banner_sidebar.url, target: "_blank" %>
+        </div>
+      <% end %>
+
+      <%= link_to "Advertise with us", advertise_path, class: "text-dark small" %>
+    </div>
+  </div>
+</div>

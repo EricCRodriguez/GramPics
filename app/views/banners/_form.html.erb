@@ -1,0 +1,69 @@
+<%= form_for @banner do |f| %>
+  <%= render 'layouts/validation', :record => @banner %>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <%= f.label :title, "Title (internal use only)" %>
+        <%= f.text_field :title, placeholder: "Title", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.text_field :url, placeholder: "http://www.mywebsite.com", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="banner_position">Position</label>
+        <select name="banner[position]" class="form-control" id="banner_position">
+          <option value="">Please select</option>
+          <option value="feed-top" <%= "selected='selected'" if @banner.position == "feed-top" %>>Feed Top</option>
+          <option value="feed-sidebar" <%= "selected='selected'" if @banner.position == "feed-sidebar" %>>Feed Sidebar</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="banner_start_time">Scheduled Start</label>
+        <%= f.date_field :start_time, class: 'form-control', placeholder: "dd/mm/yyyy" %>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="banner_start_time">Scheduled End</label>
+        <%= f.date_field :end_time, class: 'form-control', placeholder: "yyyy-mm-dd" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <%= f.label :image %>
+        <div>
+          <%= f.file_field :image %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @banner.image.present? %>
+  <p>
+    <strong>Attached image:</strong>
+    <br>
+    <%= image_tag @banner.image.url, width: "300" %>
+  </p>
+<% end %>
+
+  <div class="row">
+    <div class="col">
+      <%= f.submit 'Save Banner', class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>

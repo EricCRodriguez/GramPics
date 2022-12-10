@@ -1,0 +1,10 @@
+<% title "Banners" %>
+<% heading "Banners" %>
+
+<% content_for :page_cta do %>
+  <%= link_to "New Banner", new_banner_path, class: "btn btn-success float-right" %>
+<% end %>
+
+<div class="card-box clearfix">
+  <%= render "banners/list", is_active: true %>
+</div>

@@ -1,0 +1,11 @@
+<h1 class="mt-5 text-white">Welcome to Instagram Clone</h1>
+
+<p class="lead text-white">Please register or sign in to continue.</p>
+
+<div class="row m-t-30">
+  <div class="col-6">
+    <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-success text-uppercase" %>
+    <%= link_to "Sign In", new_account_session_path, class: "btn btn-secondary text-uppercase" %>
+    <%= link_to "Sign in with Facebook", account_facebook_omniauth_authorize_path, class: "btn btn-info text-uppercase" %>
+  </div>
+</div>

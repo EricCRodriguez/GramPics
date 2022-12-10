@@ -1,0 +1,4 @@
+<%= form_tag follow_account_path, method: :post, class: "float-right" do %>
+  <%= hidden_field_tag :account_id, account_id %>
+  <%= submit_tag "Follow user", class: "btn btn-info btn-sm text-uppercase" %>
+<% end %>

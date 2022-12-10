@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= tag(:meta, name: "description", content: yield(:meta_description)) if content_for?(:meta_description) %>
+    <meta name="author" content="@davidbattersby">
+
+    <title><%= yield(:page_title) if content_for?(:page_title) %> - Instagram Clone</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body class="<%= controller.controller_name %> <%= controller.action_name %> signed-<%= account_signed_in? ? 'in' : 'out' %>">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="<%= account_signed_in? ? dashboard_path : root_path %>">
+          <i class="fa fa-hashtag"></i> Instagram Clone
+        </a>
+
+        <% if account_signed_in? %>
+        <div id="search-box">
+          <%= text_field_tag :search, nil, placeholder: "Search...", class: "form-control" %>
+          <div id="search-results"></div>
+        </div>
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <% if account_signed_in? %>
+              <%= render "layouts/account_nav" %>
+            <% else %>
+              <%= render "layouts/public_nav" %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <section class="main sunset image-with-gradient">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 inner">
+            <%= render partial: "layouts/page_heading" if is_admin? %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      <div class="gradient-overlay blue-green-gradient"></div>
+    </section>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 footer">
+          <%= render "layouts/footer" %>
+        </div>
+      </div>
+    </div>
+
+    <%= yield(:page_scripts) if content_for?(:page_scripts) %>
+  </body>
+</html>

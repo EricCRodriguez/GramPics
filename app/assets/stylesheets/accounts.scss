@@ -1,0 +1,152 @@
+// Place all the styles related to the Accounts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background: #fafafa !important;
+}
+
+.navbar-toggler:focus {
+  outline: 0;
+}
+
+#search-box {
+  position: relative;
+  margin-left: 80px;
+  width: 300px;
+
+  ul li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+
+    img {
+      float: left;
+      margin-right: 10px;
+    }
+
+    &:hover {
+      background: #f9f9f9;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  ul li a {
+    color: #000;
+    display: block;
+    text-decoration: none;
+  }
+
+  input:focus {
+    border-color: #BBB;
+    box-shadow: none;
+  }
+}
+
+#search-results {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 300px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  z-index: 100;
+  display: none;
+
+  ul {
+    margin: 0;
+    // padding: 15px;
+  }
+}
+
+@media (max-width: 799px) {
+  .navbar-brand { margin-right: 0 }
+  #search-box { margin-left: 0px; width: 180px; }
+  #search-results { width: 200px; }
+}
+
+.navbar {
+  padding: 14px 16px !important;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.homepage .navbar {
+  margin-bottom: 0;
+}
+
+.main {
+  min-height: 600px;
+}
+
+.sidebar-wrapper {
+  min-width: 350px;
+}
+
+.account-summary {
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.follower-suggestions {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.profile-stats {
+  max-width: 360px;
+  margin-bottom: 30px;
+}
+
+.profile-posts {
+  margin-top: 50px;
+}
+
+.btn-custom {
+  background: transparent;
+  border: 2px solid #ddd !important;
+  border-radius: 4px !important;
+}
+
+.btn-custom:hover {
+  background: #ddd !important;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.m-r-5 {
+  margin-right: 5px;
+}
+
+.m-r-10 {
+  margin-right: 10px;
+}
+
+.m-r-15 {
+  margin-right: 15px;
+}
+
+.m-l-15 {
+  margin-left: 15px;
+}
+
+.m-l-30 {
+  margin-left: 30px;
+}
+
+
+.footer {
+  padding-top: 15px;
+}

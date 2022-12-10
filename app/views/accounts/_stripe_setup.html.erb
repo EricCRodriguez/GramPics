@@ -1,0 +1,44 @@
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+  var handler = StripeCheckout.configure({
+    key: "<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>",
+    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+    locale: 'auto',
+    token: function(token) {
+      // You can access the token ID with `token.id`.
+      // Get the token ID to your server-side code for use.
+      $('.btn').prop("disabled", true);
+
+      var product_name = $("#product_name").val();
+
+      $.ajax({
+          url: "<%= process_stripe_payment_url %>",
+          type: 'POST',
+          contentType: "application/json",
+          data: JSON.stringify({
+            stripeToken: token.id,
+            stripeEmail: token.email
+          })
+      }).then(function(response) {
+        window.location.href = "<%= signup_welcome_path %>";
+      }).fail(function(e){
+        $('.btn').prop("disabled", false);
+        console.log('There was an error processing the payment. Please try again.')
+        console.log(e);
+        // window.location.href = "<%= checkout_error_path %>";
+      });
+    }
+  });
+
+  document.getElementById('confirmCheckout').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    // Open Checkout with further options:
+    handler.open({
+      name: 'Instagram Clone',
+      description: 'Advertising Purchase',
+      currency: "USD",
+      amount: ($("#cart-total span").data("total") * 100)
+    });
+  });
+</script>

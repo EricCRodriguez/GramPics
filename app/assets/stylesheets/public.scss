@@ -1,0 +1,40 @@
+// Place all the styles related to the public controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.homepage .main {
+  // background: #add8e6;
+  position: relative;
+}
+
+
+
+body.homepage .image-with-gradient {
+  .inner {
+    position: relative;
+    z-index: 3;
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  .blue-green-gradient {
+    background: -moz-linear-gradient(-45deg, rgba(4,150,191,0.7) 0%, rgba(0,193,182,0.7) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(4,150,191,0.7) 0%,rgba(0,193,182,0.7) 100%);
+    background: linear-gradient(135deg, rgba(4,150,191,0.7) 0%,rgba(0,193,182,0.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e60496bf', endColorstr='#e600c1b6',GradientType=1 );
+  }
+
+  &.sunset {
+    background: transparent image-url('home-bg.jpg') center center no-repeat;
+    background-size: cover;
+  }
+}
